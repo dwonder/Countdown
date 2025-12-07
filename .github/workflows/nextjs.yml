@@ -1,61 +1,51 @@
-name: Deploy Vite Static Site to Pages
+# Workflow for deploying a Vite/React site to GitHub Pages
+name: Deploy React App to Pages
 
 on:
+  # Runs on pushes targeting the 'main' branch
   push:
     branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# Sets permissions for the GITHUB_TOKEN to allow deployment
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      # 1. Setup Node.js
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          # We use a lock file name to ensure package dependencies are correct
-          cache: 'npm' # Assumes you are using npm
-
-      # 2. Install Dependencies
-      - name: Install dependencies
-        run: npm ci # Use 'npm install' if you don't have a package-lock.json committed yet
-
-      # 3. Build the Vite Project
-      # Vite projects typically build into a 'dist' folder
-      - name: Build project
-        run: npm run build # Requires a 'build' script in your package.json
-
-      # 4. Configure GitHub Pages
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      # 5. Upload Artifact
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # The 'dist' directory is the standard output for Vite
-          path: './dist' 
-
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Use a current LTS version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        # The base path must match your vite.config.js
+        run: npm run build -- --base=/Cyber_Jeopardy/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload from the 'dist' folder (Vite's default build output)
+          path: './dist'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
