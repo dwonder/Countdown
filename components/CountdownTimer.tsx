@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { TIMEFRAMES } from '../constants';
 
@@ -100,7 +101,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ duration }) => {
           strokeDashoffset={strokeDashoffset}
           strokeLinecap="round"
           transform="rotate(-90 100 100)"
-          className={`text-cyan-400 transition-all duration-1000 ease-linear ${
+          className={`text-green-500 transition-all duration-1000 ease-linear ${
             animateReset ? 'animate-ring-flash' : ''
           }`}
         />

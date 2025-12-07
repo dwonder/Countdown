@@ -34,7 +34,7 @@ function App() {
     <main className="bg-slate-900 min-h-screen text-white flex flex-col items-center justify-center p-4 font-mono antialiased">
       <div className="w-full max-w-4xl mx-auto text-center">
         <header className="mb-10">
-          <h1 className="text-3xl sm:text-4xl font-bold text-cyan-300 tracking-wide">
+          <h1 className="text-3xl sm:text-4xl font-bold text-green-400 tracking-wide">
             Candle Countdown
           </h1>
           <p className="text-slate-400 mt-2 text-sm sm:text-base">
