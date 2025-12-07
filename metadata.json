@@ -1,0 +1,5 @@
+{
+  "name": "Candle Countdown",
+  "description": "An indicator that displays the time remaining for the current trading candle to close on a selected timeframe. Features a visual countdown timer and multiple timeframe options.",
+  "requestFramePermissions": []
+}
