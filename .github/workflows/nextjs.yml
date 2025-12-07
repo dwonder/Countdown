@@ -35,7 +35,7 @@ jobs:
 
       - name: Build the project
         # The base path must match your vite.config.js
-        run: npm run build -- --base=/Cyber_Jeopardy/
+        run: npm run build -- --base=/Countdown/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
