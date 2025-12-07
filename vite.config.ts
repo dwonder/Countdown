@@ -1,6 +1,11 @@
+import { fileURLToPath } from 'url';
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
+
+// Use fileURLToPath and import.meta.url to correctly get __dirname in an ES module environment
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
@@ -16,7 +21,9 @@ export default defineConfig(({ mode }) => {
       },
       resolve: {
         alias: {
-          '@': path.resolve(__dirname, '.'),
+          // The alias should point to the 'src' directory (or wherever your code resides)
+          // For simplicity, we'll keep it pointing to the current directory ('.') as you had it.
+          '@': path.resolve(__dirname, './'), 
         }
       }
     };
